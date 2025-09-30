@@ -22,7 +22,7 @@ class RecipeCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: AppConstants.paddingMedium),
       child: InkWell(
         onTap: () {
-          print('Navegar para detalhes da receita: ${recipe.Meal}');
+          print('Navegar para detalhes da receita: ${recipe.strMeal}');
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,7 +33,7 @@ class RecipeCard extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(child: Text(
-                  recipe.Meal,
+                  recipe.strMeal,
                   style: theme.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -55,7 +55,7 @@ class RecipeCard extends StatelessWidget {
               left: AppConstants.paddingSmall,
               bottom: AppConstants.paddingSmall),
               child: Text(
-                'Categoria: ${recipe.Category}',
+                'Categoria: ${recipe.strCategory}',
                 style: theme.textTheme.bodySmall?.copyWith(
                   color: theme.colorScheme.onSurface.withOpacity(0.6),
                 ),
@@ -78,7 +78,7 @@ class RecipeCard extends StatelessWidget {
       child: ClipRRect(
         borderRadius: const BorderRadius.vertical(top: Radius.circular(AppConstants.borderRadius)),
         child: Image.network(
-          recipe.MealThumb,
+          recipe.strMealThumb,
           fit: BoxFit.cover,
           loadingBuilder: (context, child, loadingProgress) {
             if (loadingProgress == null) return child;

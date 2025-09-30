@@ -146,7 +146,7 @@
                                         </menuItem>
                                         <menuItem title="Jump to Selection" keyEquivalent="j" id="S0p-oC-mLd">
                                             <connections>
-                                                <action selector="centerSelectionInVisibleArea:" target="-1" id="IOG-6D-g5B"/>
+                                                <action selector="centerSelectionInVisiblestrArea:" target="-1" id="IOG-6D-g5B"/>
                                             </connections>
                                         </menuItem>
                                     </items>

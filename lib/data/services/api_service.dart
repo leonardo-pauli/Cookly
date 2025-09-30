@@ -2,14 +2,14 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../../core/constants.dart'; 
 
-/// Serviço responsável por fazer requisições HTTP para a TheMealDB.
+/// Serviço responsável por fazer requisições HTTP para a ThestrMealDB.
 class ApiService {
   final http.Client _client;
 
   ApiService({http.Client? client}) : _client = client ?? http.Client();
 
   /// Busca o JSON dos detalhes de uma receita pelo seu ID.
-  Future<Map<String, dynamic>> fetchMealDetails(String idMeal) async {
+  Future<Map<String, dynamic>> fetchstrMealDetails(String idMeal) async {
     final uri = Uri.parse(
         '${AppConstants.baseUrl}${AppConstants.lookupByIdEndpoint}?i=$idMeal');
 
@@ -17,14 +17,14 @@ class ApiService {
   }
 
   /// Busca uma lista de receitas (ex: para a Home Page).
-  Future<List<Map<String, dynamic>>?> searchMeals(String query) async {
+  Future<List<Map<String, dynamic>>?> searchstrMeals(String query) async {
     //busca por nome (query)
     final uri = Uri.parse(
         '${AppConstants.baseUrl}${AppConstants.searchByNameEndpoint}?s=$query');
     
     final responseData = await _get(uri);
 
-    //retorna os resultados dentro de um array chamado 'meals'
+    // resultados vêm no array 'meals'
     final mealsList = responseData['meals'];
 
     // Se a API retornar 'null'
@@ -34,6 +34,21 @@ class ApiService {
     
     // Retorna a lista de JSONs das receitas
     return mealsList.cast<Map<String, dynamic>>();
+  }
+
+  Future<List<Map<String, dynamic>>?> searchstrMealsByLetter(String letter) async {
+    final uri = Uri.parse(
+      '${AppConstants.baseUrl}${AppConstants.searchByFirsLetterEndpoint}?f=$letter');
+
+      final responseData = await _get(uri);
+      final mealsList = responseData['meals'];
+
+      if(mealsList == null || mealsList is! List){
+        return null;
+      }
+
+      return mealsList.cast<Map<String, dynamic>>();
+    
   }
 
   //Método Privado de Requisição

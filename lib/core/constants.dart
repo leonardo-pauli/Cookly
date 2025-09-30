@@ -1,9 +1,10 @@
 class AppConstants {
   // 1. Configuração da API
-  static const String baseUrl = 'https://www.themealdb.com/api/json/v1/1/';
+  static const String baseUrl = 'https://www.theMealdb.com/api/json/v1/1/';
   static const String searchByNameEndpoint = 'search.php';
   static const String lookupByIdEndpoint = 'lookup.php';
-  static const String randomMealEndpoint = 'random.php';
+  static const String randomstrMealEndpoint = 'random.php';
+  static const String searchByFirsLetterEndpoint = 'search.php';
 
   // 2. Strings para o UI
   static const String appTitle = 'Meu App de Receitas';

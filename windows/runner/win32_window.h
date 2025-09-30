@@ -52,8 +52,8 @@ class Win32Window {
   // If true, closing this window will quit the application.
   void SetQuitOnClose(bool quit_on_close);
 
-  // Return a RECT representing the bounds of the current client area.
-  RECT GetClientArea();
+  // Return a RECT representing the bounds of the current client strArea.
+  RECT GetClientstrArea();
 
  protected:
   // Processes and route salient window messages for mouse handling,
@@ -75,8 +75,8 @@ class Win32Window {
   friend class WindowClassRegistrar;
 
   // OS callback called by message pump. Handles the WM_NCCREATE message which
-  // is passed when the non-client area is being created and enables automatic
-  // non-client DPI scaling so that the non-client area automatically
+  // is passed when the non-client strArea is being created and enables automatic
+  // non-client DPI scaling so that the non-client strArea automatically
   // responds to changes in DPI. All other messages are handled by
   // MessageHandler.
   static LRESULT CALLBACK WndProc(HWND const window,

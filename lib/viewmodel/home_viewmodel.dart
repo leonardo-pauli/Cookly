@@ -3,7 +3,7 @@ import 'package:cookly/data/models/recipe.dart';
 import 'package:cookly/data/repository/recipe_repository.dart';
 import 'package:flutter/foundation.dart';
 
-enum ViewState { loading, loaded, error}
+enum ViewState { loading, loaded, error, errorMessage}
 
 class HomeViewmodel extends ChangeNotifier{
 

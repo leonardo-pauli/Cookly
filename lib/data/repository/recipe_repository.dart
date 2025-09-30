@@ -9,22 +9,23 @@ class RecipeRepository {
   RecipeRepository({required ApiService apiService}) : _apiService = apiService;
 
   Future<List<Recipe>> fetchInitialRecipes() async {
-    final List<Map<String, dynamic>>? mealsJsonList = await _apiService.searchMeals('chicken');
+    final List<Map<String, dynamic>>? MealsJsonList = 
+    await _apiService.searchstrMealsByLetter('b');
 
-    if(mealsJsonList == null || mealsJsonList.isEmpty){
+    if(MealsJsonList == null || MealsJsonList.isEmpty){
       return [];
     }
 
-    return mealsJsonList.map((json) => Recipe.fromJson(json)).toList();
+    return MealsJsonList.map((json) => Recipe.fromJson(json)).toList();
   }
 
   Future<Recipe?> fetchRecipeDetails(String idMeal) async {
-    final Map<String, dynamic> responseData = await _apiService.fetchMealDetails(idMeal);
+    final Map<String, dynamic> responseData = await _apiService.fetchstrMealDetails(idMeal);
 
-    final List<dynamic>? mealsList = responseData['meals'];
+    final List<dynamic>? strMealsList = responseData['strMeals'];
 
-    if(mealsList != null && mealsList.isNotEmpty){
-      return Recipe.fromJson(mealsList.first as Map<String, dynamic>);
+    if(strMealsList != null && strMealsList.isNotEmpty){
+      return Recipe.fromJson(strMealsList.first as Map<String, dynamic>);
     }
     return null;
   }
