@@ -9,7 +9,7 @@ class ApiService {
   ApiService({http.Client? client}) : _client = client ?? http.Client();
 
   /// Busca o JSON dos detalhes de uma receita pelo seu ID.
-  Future<Map<String, dynamic>> fetchstrMealDetails(String idMeal) async {
+  Future<Map<String, dynamic>> fetchMealDetails(String idMeal) async {
     final uri = Uri.parse(
         '${AppConstants.baseUrl}${AppConstants.lookupByIdEndpoint}?i=$idMeal');
 
@@ -17,7 +17,7 @@ class ApiService {
   }
 
   /// Busca uma lista de receitas (ex: para a Home Page).
-  Future<List<Map<String, dynamic>>?> searchstrMeals(String query) async {
+  Future<List<Map<String, dynamic>>?> searchMeals(String query) async {
     //busca por nome (query)
     final uri = Uri.parse(
         '${AppConstants.baseUrl}${AppConstants.searchByNameEndpoint}?s=$query');
@@ -36,7 +36,7 @@ class ApiService {
     return mealsList.cast<Map<String, dynamic>>();
   }
 
-  Future<List<Map<String, dynamic>>?> searchstrMealsByLetter(String letter) async {
+  Future<List<Map<String, dynamic>>?> searchMealsByLetter(String letter) async {
     final uri = Uri.parse(
       '${AppConstants.baseUrl}${AppConstants.searchByFirsLetterEndpoint}?f=$letter');
 

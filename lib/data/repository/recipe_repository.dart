@@ -1,4 +1,6 @@
 
+import 'dart:convert';
+
 import 'package:cookly/data/models/recipe.dart';
 import 'package:cookly/data/services/api_service.dart';
 
@@ -10,7 +12,7 @@ class RecipeRepository {
 
   Future<List<Recipe>> fetchInitialRecipes() async {
     final List<Map<String, dynamic>>? MealsJsonList = 
-    await _apiService.searchstrMealsByLetter('b');
+    await _apiService.searchMealsByLetter('b');
 
     if(MealsJsonList == null || MealsJsonList.isEmpty){
       return [];
@@ -20,7 +22,7 @@ class RecipeRepository {
   }
 
   Future<Recipe?> fetchRecipeDetails(String idMeal) async {
-    final Map<String, dynamic> responseData = await _apiService.fetchstrMealDetails(idMeal);
+    final Map<String, dynamic> responseData = await _apiService.fetchMealDetails(idMeal);
 
     final List<dynamic>? strMealsList = responseData['strMeals'];
 
@@ -28,5 +30,16 @@ class RecipeRepository {
       return Recipe.fromJson(strMealsList.first as Map<String, dynamic>);
     }
     return null;
+  }
+
+  Future <List<Recipe>> searchRecipes(String query) async {
+    final List<Map<String, dynamic>>? MealsJsonList =
+    await _apiService.searchMeals(query);
+
+    if(MealsJsonList == null || MealsJsonList.isEmpty) {
+      return [];
+    }
+
+    return MealsJsonList.map((json) => Recipe.fromJson(json)).toList();
   }
 }
