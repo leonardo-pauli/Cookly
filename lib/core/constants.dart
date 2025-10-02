@@ -5,6 +5,7 @@ class AppConstants {
   static const String lookupByIdEndpoint = 'lookup.php';
   static const String randomstrMealEndpoint = 'random.php';
   static const String searchByFirsLetterEndpoint = 'search.php';
+  static const String categoriesEndpoint = 'categories.php';
 
   // 2. Strings para o UI
   static const String appTitle = 'Meu App de Receitas';

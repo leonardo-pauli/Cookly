@@ -68,4 +68,19 @@ class ApiService {
       throw Exception('Erro de conexão com a API: $e');
     }
   }
+
+  Future<List<Map<String, dynamic>>?> fetchCategories() async {
+    final uri = Uri.parse(
+      '${AppConstants.baseUrl}${AppConstants.categoriesEndpoint}');
+
+      final responseData = await _get(uri);
+
+      final categoriesList = responseData['categories'];
+
+      if(categoriesList == null || categoriesList is! List){
+        return null;
+      }
+
+      return categoriesList.cast<Map<String, dynamic>>();
+  }
 }
