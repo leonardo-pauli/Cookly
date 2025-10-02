@@ -1,6 +1,6 @@
 import 'package:cookly/view/pages/detail_page.dart';
 import 'package:cookly/view/pages/favorites_page.dart';
-import 'package:cookly/view/pages/home_page.dart';
+import 'package:cookly/view/pages/main_screen.dart';
 import 'package:flutter/material.dart';
 
 class AppRoutes {
@@ -9,7 +9,7 @@ class AppRoutes {
       static const String recipeDetail = 'recipe_detail';
 
   static final Map<String, WidgetBuilder> routes = {
-    home: (context) => const HomePage(),
+    home: (context) => const MainScreen(),
 
     favorites: (context) => const FavoritesPage(),
 
