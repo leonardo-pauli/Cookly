@@ -101,7 +101,6 @@ class HomeViewModel extends ChangeNotifier {
     }
   }
 
-  // --- Método Auxiliar ---
   void _setState(ViewState newState) {
     _state = newState;
     notifyListeners();

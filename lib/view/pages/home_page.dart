@@ -23,13 +23,96 @@ class _HomePageState extends State<HomePage> {
 
         actions: [IconButton(onPressed: () {}, icon: Icon(Icons.favorite))],
       ),
-      body: Consumer<HomeViewmodel>(
+      body: Consumer<HomeViewModel>(
         builder: (context, viewModel, child) {
+
           if (viewModel.state == ViewState.loading) {
             return LoadingWidget();
           }
+
           if (viewModel.state == ViewState.error || viewModel.recipes.isEmpty) {
-            return Center(
+
+            return _buildErrorState(context, viewModel);
+
+          }
+
+          return Column(
+            children: [
+              _buildCategoryFilter(context, viewModel),
+              Expanded(
+                child: ListView.builder(
+                  padding: EdgeInsets.all(AppConstants.paddingMedium),
+                  itemCount: viewModel.recipes.length,
+                  itemBuilder: (context, index) {
+                    final recipe = viewModel.recipes[index];
+                    return RecipeCard(
+                      recipe: recipe,
+                      onToggleFavorite: () {
+                        viewModel.toggleFavoriteStatus(recipe.idMeal);
+                      },
+                    );
+                  },
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+}
+
+Widget _buildCategoryFilter(BuildContext context, HomeViewModel viewModel){
+  final theme = Theme.of(context);
+  final primaryColor = theme.colorScheme.primary;
+
+  if(viewModel.categories.isEmpty){
+    return const SizedBox.shrink();
+  }
+
+  return Container(
+    height: 50,
+    padding: const EdgeInsets.symmetric(vertical: AppConstants.paddingSmall),
+    child: ListView.builder(
+      scrollDirection: Axis.horizontal,
+      itemCount: viewModel.categories.length,
+      itemBuilder: (context, index){
+        final category = viewModel.categories[index];
+        final isSelected = category.strCategory == viewModel.selectedCategoryName;
+
+        return Padding(
+          padding: EdgeInsets.only(left: AppConstants.paddingSmall),
+          child: ChoiceChip(
+            label: Text(category.strCategory), 
+            selected: isSelected,
+            selectedColor: primaryColor,
+
+            labelStyle: theme.textTheme.labelLarge?.copyWith(
+              color: isSelected
+              ? Colors.white
+              : theme.colorScheme.onSurface,
+              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+            ),
+            backgroundColor: theme.colorScheme.surface,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+              side: BorderSide(
+                color: isSelected ? primaryColor : theme.colorScheme.outline,
+              ),
+            ),
+            onSelected: (_) {
+              viewModel.selectCategory(category.strCategory);
+            },
+            ),
+          );
+      },
+    ),
+  );
+
+}
+
+Widget _buildErrorState(BuildContext context, HomeViewModel viewModel){
+  return Center(
               child: Padding(
                 padding: EdgeInsets.all(AppConstants.paddingLarge),
                 child: Column(
@@ -58,22 +141,4 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             );
-          }
-          return ListView.builder(
-            padding: EdgeInsets.all(AppConstants.paddingMedium),
-            itemCount: viewModel.recipes.length,
-            itemBuilder: (context, index) {
-              final recipe = viewModel.recipes[index];
-              return RecipeCard(
-                recipe: recipe,
-                onToggleFavorite: () {
-                  viewModel.toggleFavoriteStatus(recipe.idMeal);
-                },
-              );
-            },
-          );
-        },
-      ),
-    );
-  }
 }

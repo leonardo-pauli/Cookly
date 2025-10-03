@@ -24,8 +24,8 @@ class Cookly extends StatelessWidget {
             apiService: Provider.of<ApiService>(context, listen: false),
           ),
         ),
-        ChangeNotifierProvider<HomeViewmodel>(
-          create: (context) => HomeViewmodel(
+        ChangeNotifierProvider<HomeViewModel>(
+          create: (context) => HomeViewModel(
             repository: Provider.of<RecipeRepository>(context, listen: false),
           ),
         ),
