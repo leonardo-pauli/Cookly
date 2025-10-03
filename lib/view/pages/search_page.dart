@@ -90,7 +90,7 @@ class SearchPage extends StatelessWidget {
         return RecipeCard(
           recipe: recipe,
           onToggleFavorite: () {
-            print('Favorito clicado na busca: ${recipe.idMeal}');
+            viewModel.toggleFavoriteStatus(recipe.idMeal);
           },
         );
       },

@@ -55,6 +55,20 @@ class SearchViewModel extends ChangeNotifier{
     }
  }
 
+ Future<void> toggleFavoriteStatus(String idMeal) async {
+  final recipeIndex = _searchResults.indexWhere((r) => r.idMeal == idMeal);
+
+  if(recipeIndex != -1){
+    final currentRecipe = _searchResults[recipeIndex];
+    final newFavoriteStatus = !currentRecipe.isFavorite;
+
+    _repository.toggleFavorite(idMeal, newFavoriteStatus);
+
+    _searchResults[recipeIndex] = currentRecipe.copyWith(isFavorite: newFavoriteStatus);
+    notifyListeners();
+    }
+ }
+
  void _setState(SearchViewState newState){
   _state = newState;
   notifyListeners();

@@ -1,7 +1,6 @@
 import 'package:cookly/view/widgets/loading.dart';
 import 'package:cookly/view/widgets/recipe_card.dart';
 import 'package:cookly/viewmodel/favorites_viewmodel.dart';
-import 'package:cookly/viewmodel/home_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/constants.dart';

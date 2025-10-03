@@ -66,6 +66,7 @@ class FavoritesViewmodel extends ChangeNotifier {
       await _repository.toggleFavorite(idMeal, newFavoriteStatus);
 
       await loadFavoriteRecipes();
+      notifyListeners();
     }
   }
 
