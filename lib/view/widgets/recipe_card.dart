@@ -1,3 +1,4 @@
+import 'package:cookly/core/app_routes.dart';
 import 'package:cookly/core/constants.dart';
 import 'package:cookly/data/models/recipe.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,10 @@ class RecipeCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: AppConstants.paddingMedium),
       child: InkWell(
         onTap: () {
-          print('Navegar para detalhes da receita: ${recipe.strMeal}');
+          Navigator.of(context).pushNamed(
+            AppRoutes.recipeDetail,
+            arguments: recipe.idMeal,
+          );
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

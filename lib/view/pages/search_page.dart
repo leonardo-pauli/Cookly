@@ -21,7 +21,7 @@ class SearchPage extends StatelessWidget {
         builder: (context, viewModel, child) {
           return Column(
             children: [
-              SizedBox(height: AppConstants.paddingMedium),
+              SizedBox(height: AppConstants.paddingSmall),
               _buildSeachBar(context, viewModel),
 
               Expanded(child: _buildBodyContent(context, viewModel)),

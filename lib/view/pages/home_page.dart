@@ -69,7 +69,7 @@ Widget _buildCategoryFilter(BuildContext context, HomeViewModel viewModel){
   }
 
   return Container(
-    height: 50,
+    height: 60,
     padding: const EdgeInsets.symmetric(vertical: AppConstants.paddingSmall),
     child: ListView.builder(
       scrollDirection: Axis.horizontal,

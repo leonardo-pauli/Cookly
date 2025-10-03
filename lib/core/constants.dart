@@ -8,12 +8,12 @@ class AppConstants {
   static const String categoriesEndpoint = 'categories.php';
 
   // 2. Strings para o UI
-  static const String appTitle = 'Meu App de Receitas';
-  static const String homeTitle = 'Receitas em Destaque';
-  static const String favoritesTitle = 'Minhas Receitas Favoritas';
-  static const String searchTitle = 'Pesquisar por Receitas';
-  static const String loadingMessage = 'Buscando a receita...';
-  static const String noDataMessage = 'Nenhuma receita encontrada. :(';
+  static const String appTitle = 'My Recipes App';
+  static const String homeTitle = 'Featured Recipes';
+  static const String favoritesTitle = 'My Favorite Recipes';
+  static const String searchTitle = 'Search by Recipes';
+  static const String loadingMessage = 'Searching the recipe...';
+  static const String noDataMessage = 'No recipe found. :(';
 
   // 3. Dimensões Comuns
   static const double paddingLarge = 24.0;
