@@ -1,5 +1,4 @@
 
-import 'dart:convert';
 
 import 'package:cookly/data/models/category.dart';
 import 'package:cookly/data/models/recipe.dart';
@@ -20,7 +19,6 @@ class RecipeRepository {
   }
 
   
-  @override
   Future<void> toggleFavorite(String idMeal, bool isCurrentlyFavorite) async {
     List<String> favorites = await _loadFavoriteIds();
 
@@ -55,10 +53,10 @@ class RecipeRepository {
   Future<Recipe?> fetchRecipeDetails(String idMeal) async {
     final Map<String, dynamic> responseData = await _apiService.fetchMealDetails(idMeal);
 
-    final List<dynamic>? strMealsList = responseData['strMeals'];
+    final List<dynamic>? MealsList = responseData['meals'];
 
-    if(strMealsList != null && strMealsList.isNotEmpty){
-      return Recipe.fromJson(strMealsList.first as Map<String, dynamic>);
+    if(MealsList != null && MealsList.isNotEmpty){
+      return Recipe.fromJson(MealsList.first as Map<String, dynamic>);
     }
     return null;
   }
@@ -86,7 +84,6 @@ class RecipeRepository {
 
     return CategoriesJsonList.map((json) => MealCategory.fromJson(json)).toList();
   }
-  @override
   Future<List<Recipe>> fetchRecipesByCategory(String categoryName) async {
     final List<Map<String, dynamic>>? mealsJsonList =
     await _apiService.searchMeals(categoryName);
@@ -107,5 +104,29 @@ class RecipeRepository {
       final isFav = favoriteIds.contains(recipe.idMeal);
       return recipe.copyWith(isFavorite: isFav);
     }).toList();
+  }
+
+  Future<List<Recipe>> fetchFavoriteRecipesDetails() async {
+    final favoriteIds = await _loadFavoriteIds();
+    print('DEBUG FAV: IDs de favoritos lidos do disco: $favoriteIds');
+
+    if(favoriteIds.isEmpty){
+      return [];
+    }
+
+    List<Recipe> favoriteRecipes = [];
+
+    for(String idMeal in favoriteIds){
+      print('DEBUG FAV: Buscando detalhes para ID: $idMeal'); 
+      final recipe = await fetchRecipeDetails(idMeal);
+
+      if(recipe != null){
+        favoriteRecipes.add(recipe.copyWith(isFavorite: true));
+      }else{
+        print('DEBUG FAV: Falha ao encontrar detalhes para ID: $idMeal');
+      }
+    }
+     print('DEBUG FAV: Total de receitas carregadas: ${favoriteRecipes.length}'); 
+    return favoriteRecipes;
   }
 }

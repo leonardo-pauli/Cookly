@@ -11,6 +11,7 @@ class AppConstants {
   static const String appTitle = 'Meu App de Receitas';
   static const String homeTitle = 'Receitas em Destaque';
   static const String favoritesTitle = 'Minhas Receitas Favoritas';
+  static const String searchTitle = 'Pesquisar por Receitas';
   static const String loadingMessage = 'Buscando a receita...';
   static const String noDataMessage = 'Nenhuma receita encontrada. :(';
 

@@ -20,8 +20,6 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(AppConstants.homeTitle),
         centerTitle: false,
-
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.favorite))],
       ),
       body: Consumer<HomeViewModel>(
         builder: (context, viewModel, child) {

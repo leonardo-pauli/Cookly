@@ -2,6 +2,7 @@ import 'package:cookly/core/app_routes.dart';
 import 'package:cookly/core/app_theme.dart';
 import 'package:cookly/data/repository/recipe_repository.dart';
 import 'package:cookly/data/services/api_service.dart';
+import 'package:cookly/viewmodel/favorites_viewmodel.dart';
 import 'package:cookly/viewmodel/home_viewmodel.dart';
 import 'package:cookly/viewmodel/search_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,11 @@ class Cookly extends StatelessWidget {
         ),
         ChangeNotifierProvider<SearchViewModel>(
           create: (context) => SearchViewModel(
+            repository: Provider.of<RecipeRepository>(context, listen: false),
+          ),
+        ),
+                ChangeNotifierProvider<FavoritesViewmodel>(
+          create: (context) => FavoritesViewmodel(
             repository: Provider.of<RecipeRepository>(context, listen: false),
           ),
         ),
